@@ -32,3 +32,5 @@ jobs:
        reports: TestResults/**/coverage.cobertura.xml
        targetdir: CoverageResults
        reporttypes: Html;lcov
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2.2.3
