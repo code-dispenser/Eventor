@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Assets\Eventor.snk</AssemblyOriginatorKeyFile>
+    <Title>Eventor</Title>
+    <Version>1.0.0</Version>
+    <Authors>Paul Kent</Authors>
+    <Copyright>Copyright (c) 2023 Paul Kent.</Copyright>
+    <Description>A versatile event aggregator designed to seamlessly manage both publish/subscribe in-process scenarios and dynamic invocation of handlers such as those used for domain events.</Description>
+    <PackageProjectUrl>https://github.com/code-dispenser/Eventor</PackageProjectUrl>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<Deterministic>true</Deterministic>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<DebugType>embedded</DebugType>
+	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	<GenerateDocumentationFile>False</GenerateDocumentationFile>
+	<PackageReadmeFile>ReadMe.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/code-dispenser/Eventor</RepositoryUrl>
+	<PackageIcon>eventor-icon.png</PackageIcon>
+	<AssemblyVersion>1.0.0</AssemblyVersion>
+	<FileVersion>1.0.0</FileVersion>
+	<PackageLicenseFile>License.txt</PackageLicenseFile>
+	<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Eventor.Core.Tests.Integration" key="002400000480000094000000060200000024000052534131000400000100010069d8cc8e49e0dcb3e8422f7ba1e7514251fd9a29ec0331409c96df115f9506fe8e568c21891847fc3125e670bef0aa7cecdb59785b637dc1efeade59fca9784fff378ac6ab9eda6de39fdd2904defeef81c71649d7badc814ff07a4805d996c95f8a6d3a0b0b513746e2461b5d4c1e10e92db184314f0f1658fc53616f77dff6" />
+		<InternalsVisibleTo Include="Eventor.Core.Tests.Unit" key="002400000480000094000000060200000024000052534131000400000100010069d8cc8e49e0dcb3e8422f7ba1e7514251fd9a29ec0331409c96df115f9506fe8e568c21891847fc3125e670bef0aa7cecdb59785b637dc1efeade59fca9784fff378ac6ab9eda6de39fdd2904defeef81c71649d7badc814ff07a4805d996c95f8a6d3a0b0b513746e2461b5d4c1e10e92db184314f0f1658fc53616f77dff6" />
+		<InternalsVisibleTo Include="Eventor.Tests.FixturesAndData" key="002400000480000094000000060200000024000052534131000400000100010069d8cc8e49e0dcb3e8422f7ba1e7514251fd9a29ec0331409c96df115f9506fe8e568c21891847fc3125e670bef0aa7cecdb59785b637dc1efeade59fca9784fff378ac6ab9eda6de39fdd2904defeef81c71649d7badc814ff07a4805d996c95f8a6d3a0b0b513746e2461b5d4c1e10e92db184314f0f1658fc53616f77dff6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\Assets\eventor-icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\License.txt">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\ReadMe.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+
+</Project>
