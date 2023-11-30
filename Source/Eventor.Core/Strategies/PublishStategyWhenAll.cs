@@ -6,7 +6,7 @@ namespace Eventor.Core.Strategies;
 /// A stategy that awaits Task.WhenAll to complete and returns an AggregateException containing an unhandled exceptions.
 /// and/or to propegate an unhandled exceptions
 /// </summary>
-public class PublishStrategyWhenAll : IEventPublisher
+internal sealed class PublishStrategyWhenAll : IEventPublisher
 {
     ///<inheritdoc />
     public async Task Publish<TEvent>(TEvent theEvent, List<TheEventHandler<TEvent>> handlers, CancellationToken cancellationToken) where TEvent : EventBase

@@ -13,11 +13,11 @@ namespace Eventor.Core.Common.Seeds;
 public interface IEventAggregator
 {
     /// <summary>
-    /// Publishes the event via the chosen publishing stategy determined by the <typeparamref name="publishMethod"/>.
+    /// Publishes the event via the chosen publishing stategy determined by the <paramref name="publishMethod"/>.
     /// </summary>
     /// <typeparam name="TEvent">The type of event that you wish to publish.</typeparam>
     /// <param name="theEvent">The event that you wish to publish.</param>
-    /// <param name="publishMethod"></param>
+    /// <param name="publishMethod">A enumeration to select the chosen publishing stategy.</param>
     /// <param name="cancellationToken">Used to notify any handlers that a cancellation has been requested. The default is CancellationToken.None.</param>
     /// <returns>A task representing the completion of the event publishing process.</returns>
     Task Publish<TEvent>(TEvent theEvent, PublishMethod publishMethod = PublishMethod.FireAndForget, CancellationToken cancellationToken = default) where TEvent : EventBase;

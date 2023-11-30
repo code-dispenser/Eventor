@@ -3,6 +3,7 @@ using Eventor.Core.Common.Seeds;
 using Eventor.Core.Common.Validation;
 using Eventor.Core.Strategies;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace Eventor.Core
 {
@@ -15,6 +16,12 @@ namespace Eventor.Core
         private readonly Func<Type, dynamic>? _resolver;
 
         public EventAggregator() { InitPublishers(); }
+
+        /// <summary>
+        /// Overload version of the constructor that accepts a func as a call back mechanism to facilitate
+        /// communications with the IOC container for dynamic event handlers.
+        /// </summary>
+        /// <param name="resolver">A callback used to communicate with the chosen IOC container.</param>
         public EventAggregator(Func<Type, dynamic> resolver)
         {
             _resolver = resolver;
@@ -51,7 +58,7 @@ namespace Eventor.Core
 
         ///<inheritdoc />
         public async Task Publish<TEvent>(TEvent theEvent, PublishMethod publishMethod = PublishMethod.FireAndForget, CancellationToken cancellationToken = default) where TEvent : EventBase
-
+        
             => await Publish(theEvent, _publishMethods[publishMethod], cancellationToken);
 
         ///<inheritdoc />
@@ -59,6 +66,8 @@ namespace Eventor.Core
         {
             _ = Check.ThrowIfNull(theEvent);
             _ = Check.ThrowIfNull(eventPublisher);
+
+            theEvent.PublishTimeTicks = Stopwatch.GetTimestamp();
 
             var handlers = new List<TheEventHandler<TEvent>>();
 

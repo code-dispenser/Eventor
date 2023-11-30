@@ -86,6 +86,27 @@ public class EventAggregatorTests
         DynamicEventHandlerCounter.Should().Be(1);
     }
 
+    [Fact]
+    public async Task The_publish_method_should_set_the_events_publish_time_in_ticks()
+    {
+        var     theBasicEvent   = new BasicEvent("TheTester");
+        var     eventAggregator = new EventAggregator();
+        Int64   theTickCount    = 0;
+
+        var eventSubscription = eventAggregator.Subscribe<BasicEvent>(SomeEventHandler);
+
+        await eventAggregator.Publish(theBasicEvent, PublishMethod.WaitForAll, CancellationToken.None);
+
+        theTickCount.Should().BeGreaterThan(0);
+
+        async Task SomeEventHandler(BasicEvent theEvent, CancellationToken cancellationToken)
+        {
+            theTickCount = theEvent.PublishTimeTicks;
+            await Task.CompletedTask;
+        }
+
+
+    }
 
     public class MyInternalIntegrationTestHandler : IEventHandler<BasicEvent>
     {

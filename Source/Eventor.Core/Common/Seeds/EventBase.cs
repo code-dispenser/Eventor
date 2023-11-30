@@ -5,7 +5,8 @@
 /// </summary>
 public abstract class EventBase
 {
-    public string SenderName { get; }
+    public string SenderName        { get; }
+    public Int64  PublishTimeTicks  { get; internal set; }
 
     public EventBase(string senderName) => SenderName = senderName;
 

@@ -5,6 +5,7 @@ using Eventor.ConsoleDemo.Common.Events;
 using Eventor.ConsoleDemo.Scenarios;
 using Eventor.Core;
 using Eventor.Core.Common.Seeds;
+using Eventor.Core.Common.Validation;
 using Eventor.Core.Strategies;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,7 +16,7 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-
+        
         try
         {
             var serviceProvider              = FromConfiuredMicrosoftContainer();

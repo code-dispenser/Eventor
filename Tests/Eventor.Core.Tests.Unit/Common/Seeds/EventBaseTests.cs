@@ -12,6 +12,6 @@ public class EventBaseTests
     {
         var theEvent = new BasicEvent("SenderName");
 
-        theEvent.Should().BeAssignableTo<EventBase>().And.Match<BasicEvent>(e => e.SenderName == "SenderName");
+        theEvent.Should().BeAssignableTo<EventBase>().And.Match<BasicEvent>(e => e.SenderName == "SenderName" && e.PublishTimeTicks == 0);
     }
 }
