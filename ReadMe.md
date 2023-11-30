@@ -1,4 +1,14 @@
-# Eventor
+[![.NET](https://github.com/code-dispenser/Eventor/actions/workflows/buildandtest.yml/badge.svg)](https://github.com/code-dispenser/Eventor/actions/workflows/buildandtest.yml) 
+
+[download-image]: https://img.shields.io/nuget/dt/Eventor.Core
+[download-url]: https://www.nuget.org/packages/Eventor.Core
+<h1>
+<img src="https://github.com/code-dispenser/Eventor/blob/main/Assets/eventor-icon.png" align="center" height="60px" alt="Eventor icon" /> Eventor
+</h1>
+<!--
+# ![icon](https://raw.github.com/code-dispenser/Eventor/main/Assets/eventor-icon.png) Eventor
+-->
+<!-- H1 for git hub, but for nuget the markdown is fine as it centers the image, uncomment as appropriate and do the same at the bottom of this file for the icon author -->
 
 ## Overview
 
