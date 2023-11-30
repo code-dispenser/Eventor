@@ -25,6 +25,7 @@
 	<FileVersion>1.0.0</FileVersion>
 	<PackageLicenseFile>License.txt</PackageLicenseFile>
 	<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	<PackageTags>event aggregator; broker; pub sub; blazor wasm;.net;</PackageTags>
   </PropertyGroup>
 
 	<ItemGroup>
