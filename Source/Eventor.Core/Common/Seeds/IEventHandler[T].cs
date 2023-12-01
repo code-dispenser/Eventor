@@ -4,8 +4,8 @@
     /// Inteface that dyanmic event handlers (classes that are registered with your chosen IOC) must implement
     /// in order to be invoked by the EventAggregator.
     /// </summary>
-    /// <typeparam name="TEvent"></typeparam>
-    public interface IEventHandler<TEvent>
+    /// <typeparam name="TEvent">The type of event to handle. TEvent must be derived from EventBase</typeparam>
+    public interface IEventHandler<TEvent> where TEvent : EventBase
     {
         /// <summary>
         /// Invoked by the EventAggrator to process the event.
