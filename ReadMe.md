@@ -1,4 +1,4 @@
-[![.NET](https://github.com/code-dispenser/Eventor/actions/workflows/buildandtest.yml/badge.svg)](https://github.com/code-dispenser/Eventor/actions/workflows/buildandtest.yml) [![Coverage Status](https://coveralls.io/repos/github/code-dispenser/Eventor/badge.svg?branch=main)](https://coveralls.io/github/code-dispenser/Eventor?branch=main)
+[![.NET](https://github.com/code-dispenser/Eventor/actions/workflows/buildandtest.yml/badge.svg)](https://github.com/code-dispenser/Eventor/actions/workflows/buildandtest.yml) [![Coverage Status](https://coveralls.io/repos/github/code-dispenser/Eventor/badge.svg?branch=main)](https://coveralls.io/github/code-dispenser/Eventor?branch=main) [![Nuget download][download-image]][download-url]
 
 [download-image]: https://img.shields.io/nuget/dt/Eventor.Core
 [download-url]: https://www.nuget.org/packages/Eventor.Core
