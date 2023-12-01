@@ -72,7 +72,7 @@ services.AddTransient<IEventHandler<OrderProcessedEvent>, OrderProcessedEventHan
 builder.RegisterType<OrderProcessedEventHandler>().As<IEventHandler<OrderProcessedEvent>>().InstancePerDependency();
 
 ```
-From above, every time an **'OrderProcessedEvent'** is published the **'OrderProcessedEventHandler'** will be invoked, as well any associated event handler subscriptions.
+From the above, every time an **'OrderProcessedEvent'** is published the **'OrderProcessedEventHandler'** will be invoked, as will any associated event handler subscriptions.
 
 
 In conjunction with the [documentation](https://github.com/code-dispenser/Eventor/wiki) on the project Wiki, it is recommended that you download the source code from the [Git repository](https://github.com/code-dispenser/Eventor) and explore the scenarios within the demo projects. These sample scenarios should answer most of your questions.
