@@ -39,6 +39,8 @@ builder.Register(c =>
 ```
 **Note:** The **'EventAggregator'** has both a parameterless constructor and one that accepts a ```Func<Type,dynamic>```. This callback function allows Eventor, when publishing events, to request any IOC registered event handlers associated with the event being published. These handlers are then created and passed to an **'IEventPublisher'** implementation that will invoke the handler using its publish strategy.
 
+**Note:** For Blazor WebAssembly use **'AddScoped'** / **'InstancePerLifetimeScope'**. If using **'AddSingleton'** / **'SingleInstance'** ensure you call the **'Dispose'** method on any event subscriptions when you are finished with them.
+
 A client and/or component can subscribe to receive events via local event handlers using the **'Subscribe'** method on the **'EventAggregator'**:
 
 ```
