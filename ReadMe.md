@@ -39,8 +39,6 @@ builder.Register(c =>
 ```
 **Note:** The **'EventAggregator'** has both a parameterless constructor and one that accepts a ```Func<Type,dynamic>```. This callback function allows Eventor, when publishing events, to request any IOC registered event handlers associated with the event being published. These handlers are then created and passed to an **'IEventPublisher'** implementation that will invoke the handler using its publish strategy.
 
-**Note:** For Blazor WebAssembly use **'AddScoped'** / **'InstancePerLifetimeScope'**. If using **'AddSingleton'** / **'SingleInstance'** ensure you call the **'Dispose'** method on any event subscriptions when you are finished with them.
-
 A client and/or component can subscribe to receive events via local event handlers using the **'Subscribe'** method on the **'EventAggregator'**:
 
 ```
@@ -49,6 +47,10 @@ var eventSubscription = _eventAggregator.Subscribe<SomeEvent>(SomeEventHandler);
 private async Task SomeEventHandler(SomeEvent theEvent, CancellationToken cancellationToken){\...\};
 ```
 **Note:** Events are created by deriving from the **EventBase** abstract class. When you subscribe to receive events, you will be returned an **'EventSubscription'**. This subscription can be used to stop receiving events by calling its **'Dispose'** method. Eventor uses weak-referenced delegates. Once either the dispose method is called or the event subscription has gone out of scope, the underlying delegate handler will be removed from the managed invocation list.
+
+**Note:** For Blazor WebAssembly when using **'AddScoped'** / **'InstancePerLifetimeScope'** or **'AddSingleton'** / **'SingleInstance'** ensure that you call the **'Dispose'** method on any event subscriptions when you are finished with them. 
+It is recommended to implement the IDisposable or IAsyncDisposable interface and add the calls to any event subscriptions dispose methods there. You can however call the dispose method earlier if required, and calling the dispose method multiple times has no side effects. 
+
 A client and/or component can then raise an event using the **'Publish'** method, all subscribers and/or associated IOC registered event handlers will then be notified:
 
 ```
