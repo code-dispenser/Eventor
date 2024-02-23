@@ -17,12 +17,12 @@ public class EventAggregatorTests
 
 
     [Fact]
-    public async Task Should_publish_by_fire_and_forget_stategy_when_chosen()
+    public async Task Should_publish_by_fire_and_forget_strategy_when_chosen()
     { 
-        EventAggregator eventAggregator = new EventAggregator();
+        EventAggregator eventAggregator = new();
         
-        var basicEvent  = new BasicEvent("TheTester");
-        var subsription = eventAggregator.Subscribe<BasicEvent>(HandleBasicEvent);
+        var basicEvent   = new BasicEvent("TheTester");
+        var subscription = eventAggregator.Subscribe<BasicEvent>(HandleBasicEvent);
 
         await eventAggregator.Publish(basicEvent, PublishMethod.FireAndForget, CancellationToken.None);
 
@@ -39,12 +39,12 @@ public class EventAggregatorTests
     }
 
     [Fact]
-    public async Task Should_publish_by_wait_all_stategy_when_chosen()
+    public async Task Should_publish_by_wait_all_strategy_when_chosen()
     {
-        EventAggregator eventAggregator = new EventAggregator();
+        EventAggregator eventAggregator = new();
 
-        var basicEvent  = new BasicEvent("TheTester");
-        var subsription = eventAggregator.Subscribe<BasicEvent>(HandleBasicEvent);
+        var basicEvent   = new BasicEvent("TheTester");
+        var subscription = eventAggregator.Subscribe<BasicEvent>(HandleBasicEvent);
 
         await eventAggregator.Publish(basicEvent, PublishMethod.WaitForAll, CancellationToken.None);
 
@@ -128,8 +128,8 @@ public class EventAggregatorTests
             return new EventAggregator(type => context.Resolve(type));
         }).SingleInstance();
 
-        IContainer containter = builder.Build();
+        IContainer container = builder.Build();
 
-        return containter.Resolve<EventAggregator>();
+        return container.Resolve<EventAggregator>();
     }
 }

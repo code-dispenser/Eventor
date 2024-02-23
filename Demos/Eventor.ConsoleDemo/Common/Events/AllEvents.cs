@@ -8,13 +8,9 @@ public class YetAnotherBasicEvent(string senderName)    : EventBase(senderName) 
 
 public class CustomPublisherEvent(string senderName)    : EventBase(senderName) { };
 
-public class OrderProcessedEvent : EventBase
+public class OrderProcessedEvent(string senderName, Guid orderID) : EventBase(senderName)
 {
-    public Guid OrderID { get;}
-    public OrderProcessedEvent(string senderName, Guid orderID) : base(senderName) 
-    {
-        OrderID = orderID;
-    }
+    public Guid OrderID { get; } = orderID;
 }
 
 

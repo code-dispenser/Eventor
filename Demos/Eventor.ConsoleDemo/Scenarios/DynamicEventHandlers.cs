@@ -3,13 +3,9 @@ using Eventor.Core.Common.Seeds;
 
 namespace Eventor.ConsoleDemo.Scenarios;
 
-public class DynamicEventHandlers
+public class DynamicEventHandlers(IEventAggregator eventAggregator)
 {
-    private readonly IEventAggregator _eventAggregator;
-
-    public DynamicEventHandlers(IEventAggregator eventAggregator)
-        
-        => _eventAggregator = eventAggregator;
+    private readonly IEventAggregator _eventAggregator = eventAggregator;
 
     public async Task RunFireAndForget()
     {

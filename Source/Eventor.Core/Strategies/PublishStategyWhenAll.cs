@@ -3,8 +3,8 @@
 namespace Eventor.Core.Strategies;
 
 /// <summary>
-/// A stategy that awaits Task.WhenAll to complete and returns an AggregateException containing an unhandled exceptions.
-/// and/or to propegate an unhandled exceptions
+/// A strategy that awaits Task.WhenAll to complete and returns an AggregateException containing an unhandled exceptions.
+/// and/or to propagate an unhandled exceptions
 /// </summary>
 internal sealed class PublishStrategyWhenAll : IEventPublisher
 {

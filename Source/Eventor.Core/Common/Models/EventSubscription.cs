@@ -1,9 +1,9 @@
 ﻿namespace Eventor.Core.Common.Models;
 
 /// <summary>
-/// An event subscription that keeps the weakreferenced delegate handler alive until disposed 
+/// An event subscription that keeps the weak referenced delegate handler alive until disposed 
 /// or the EventSubscription goes out of scope. 
-/// Calling the Dispose method at any time unsubcribes the associated event handler.
+/// Calling the Dispose method at any time unsubscribes the associated event handler.
 /// </summary>
 public class EventSubscription : IDisposable
 {

@@ -3,13 +3,9 @@ using Eventor.Core.Common.Seeds;
 
 namespace Eventor.ConsoleDemo.Scenarios;
 
-public class LocalEventHandlers
+public class LocalEventHandlers(IEventAggregator eventAggregator)
 {
-    private readonly IEventAggregator _eventAggregator;
-
-    public LocalEventHandlers(IEventAggregator eventAggregator)
-    
-        => _eventAggregator = eventAggregator;
+    private readonly IEventAggregator _eventAggregator = eventAggregator;
 
     public async Task RunFireAndForget()
     {
@@ -25,14 +21,14 @@ public class LocalEventHandlers
 
         await Task.Delay(10);
         /*
-             * If we dont dispose, as the methods run in quick sucession the GC will not have happened and the subscribed handler inside the singleton EventAggregator
+             * If we don't dispose, as the methods run in quick succession the GC will not have happened and the subscribed handler inside the singleton EventAggregator
              * will still be alive and be called again when the next BasicEvent is published in the next method run in the demo.
          */
         subscription.Dispose();
         /*
             * Only using an inline handler to keep all the code together.
-        */ 
-        async Task FireAndForgetHandler(BasicEvent basicEvent, CancellationToken cancellationToken)
+        */
+        static async Task FireAndForgetHandler(BasicEvent basicEvent, CancellationToken cancellationToken)
         {
             await Console.Out.WriteLineAsync($"Handling the event {nameof(BasicEvent)} in the local handler: {nameof(FireAndForgetHandler)}. \r\n");
         }
@@ -61,7 +57,7 @@ public class LocalEventHandlers
 
         subscription.Dispose();
 
-        async Task FireAndForgetErroneousHandler(BasicEvent basicEvent, CancellationToken cancellationToken)
+        static async Task FireAndForgetErroneousHandler(BasicEvent basicEvent, CancellationToken cancellationToken)
         {
             await Console.Out.WriteLineAsync($"Inside the the {nameof(FireAndForgetErroneousHandler)} and throwing an unhandled exception.");
             throw new NotImplementedException();
@@ -80,12 +76,12 @@ public class LocalEventHandlers
         await _eventAggregator.Publish(basicEvent, PublishMethod.WaitForAll);
 
         /*
-             * If we dont dispose as the methods run in quick sucession the GC will not have happened and the subscribed handler will still be alive
+             * If we don't dispose as the methods run in quick succession the GC will not have happened and the subscribed handler will still be alive
              * when the next method is run in the demo.
          */
         subscription.Dispose();
 
-        async Task WaitForAllHandler(BasicEvent basicEvent, CancellationToken cancellationToken)
+        static async Task WaitForAllHandler(BasicEvent basicEvent, CancellationToken cancellationToken)
         {
             await Console.Out.WriteLineAsync($"Handling the event {nameof(BasicEvent)} in the local handler: {nameof(WaitForAllHandler)}. \r\n");
         }
@@ -113,7 +109,7 @@ public class LocalEventHandlers
 
         subscription.Dispose();
 
-        async Task WaitForAllWithUnhandledExceptions(BasicEvent basicEvent, CancellationToken cancellationToken)
+        static async Task WaitForAllWithUnhandledExceptions(BasicEvent basicEvent, CancellationToken cancellationToken)
         {
             await Console.Out.WriteLineAsync($"Inside the the {nameof(WaitForAllWithUnhandledExceptions)} and throwing an unhandled exception.");
             throw new NotImplementedException();

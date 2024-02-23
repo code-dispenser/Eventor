@@ -17,8 +17,4 @@
     <ProjectReference Include="..\..\Source\Eventor.Core\Eventor.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Models\" />
-  </ItemGroup>
-
 </Project>

@@ -3,17 +3,14 @@ using Eventor.Core.Common.Seeds;
 
 namespace Eventor.ConsoleDemo.Scenarios
 {
-    public class BothHandlerTypes
+    public class BothHandlerTypes(IEventAggregator eventAggregator)
     {
-        private readonly IEventAggregator _eventAggregator;
-        public BothHandlerTypes(IEventAggregator eventAggregator)
-
-            => _eventAggregator = eventAggregator;
+        private readonly IEventAggregator _eventAggregator = eventAggregator;
 
         public async Task RunHandlersUsingFireAndForget()
         {
             var orderProcessedEvent = new OrderProcessedEvent(nameof(RunHandlersUsingFireAndForget), Guid.NewGuid());
-            var orderSubsciption    = _eventAggregator.Subscribe<OrderProcessedEvent>(LocalOrderHandler);
+            var orderSubscription   = _eventAggregator.Subscribe<OrderProcessedEvent>(LocalOrderHandler);
 
             await Console.Out.WriteLineAsync($"Publishing the event {nameof(OrderProcessedEvent)}.\r\n");
             await _eventAggregator.Publish(orderProcessedEvent);

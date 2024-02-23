@@ -14,9 +14,9 @@ namespace Eventor.ConsoleDemo.Scenarios
             
         public async Task RunCustomEventPublisher()
         {
-            var customPublsiherEvent = new CustomPublisherEvent(nameof(RunCustomEventPublisher));
+            var customPublisherEvent = new CustomPublisherEvent(nameof(RunCustomEventPublisher));
 
-            await _eventAggregator.Publish(customPublsiherEvent,_eventPublisher);
+            await _eventAggregator.Publish(customPublisherEvent,_eventPublisher);
 
         }
 

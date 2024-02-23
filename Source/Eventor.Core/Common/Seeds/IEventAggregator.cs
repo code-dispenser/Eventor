@@ -7,23 +7,23 @@ namespace Eventor.Core.Common.Seeds;
 */ 
 
 /// <summary>
-/// Event Aggregator is responsible for publishing events via notifiying all of the local subscribed event handlers and for communicating with the
-/// chosen IOC container to obtain any registered event handlers that are dymaincall invoked.
+/// Event Aggregator is responsible for publishing events via notifying all of the local subscribed event handlers and for communicating with the
+/// chosen IOC container to obtain any registered event handlers that are dynamically invoked.
 /// </summary>
 public interface IEventAggregator
 {
     /// <summary>
-    /// Publishes the event via the chosen publishing stategy determined by the <paramref name="publishMethod"/>.
+    /// Publishes the event via the chosen publishing strategy determined by the <paramref name="publishMethod"/>.
     /// </summary>
     /// <typeparam name="TEvent">The type of event that you wish to publish.</typeparam>
     /// <param name="theEvent">The event that you wish to publish.</param>
-    /// <param name="publishMethod">A enumeration to select the chosen publishing stategy.</param>
+    /// <param name="publishMethod">A enumeration to select the chosen publishing strategy.</param>
     /// <param name="cancellationToken">Used to notify any handlers that a cancellation has been requested. The default is CancellationToken.None.</param>
     /// <returns>A task representing the completion of the event publishing process.</returns>
     Task Publish<TEvent>(TEvent theEvent, PublishMethod publishMethod = PublishMethod.FireAndForget, CancellationToken cancellationToken = default) where TEvent : EventBase;
 
     /// <summary>
-    /// Publishes the event via the chosen publishing stategy, IEventPublisher.Publish.
+    /// Publishes the event via the chosen publishing strategy, IEventPublisher.Publish.
     /// </summary>
     /// <typeparam name="TEvent">The type of event that you wish to publish.</typeparam>
     /// <param name="theEvent">The event that you wish to publish.</param>
@@ -34,11 +34,11 @@ public interface IEventAggregator
 
     /// <summary>
     /// The Subscribe method allows you to subscribe to events that you can handle locally via handlers created in forms and view models, for example.
-    /// Events can also be handled dynaically via registration of event handler classes in an IOC container.
+    /// Events can also be handled dynamically via registration of event handler classes in an IOC container.
     /// </summary>
     /// <typeparam name="TEvent">The type of event you wish to register the handler for.</typeparam>
-    /// <param name="handler">The method that satifies the public delegate TheEventHandler&lt;Event&gt;
+    /// <param name="handler">The method that satisfies the public delegate TheEventHandler&lt;Event&gt;
     /// The method must accept two arguments, the actual type of event and a CancellationToken.</param>
-    /// <returns>An EventSubscription object <see cref="EventSubscription"/> to be disposed when you no longer wish to recieve events.</returns>
+    /// <returns>An EventSubscription object <see cref="EventSubscription"/> to be disposed when you no longer wish to receive events.</returns>
     EventSubscription Subscribe<TEvent>(TheEventHandler<TEvent> handler) where TEvent : EventBase;
 }

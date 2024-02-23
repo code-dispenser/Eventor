@@ -22,7 +22,7 @@ namespace Eventor.Core.Tests.Unit
 
             theEvenSubscription.Should().BeOfType<EventSubscription>();
 
-            async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
 
         }
 
@@ -36,15 +36,15 @@ namespace Eventor.Core.Tests.Unit
 
             theEvenSubscription.Dispose();
 
-            var theCountaftertDispose = eventAggregator.HandlerCountFor<BasicEvent>();
+            var theCountAfterDispose = eventAggregator.HandlerCountFor<BasicEvent>();
 
             using(new AssertionScope())
             {
                 theCountBeforeDispose.Should().Be(1);
-                theCountaftertDispose.Should().Be(0);
+                theCountAfterDispose.Should().Be(0);
             }
 
-            async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
 
         }
 
@@ -59,11 +59,11 @@ namespace Eventor.Core.Tests.Unit
 
             theHandlerCount.Should().Be(1);
 
-            async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
         }
 
         [Fact]
-        public void Unsubscibing_from_a_duplicate_event_subscription_should_not_throw_an_exception()
+        public void Unsubscribing_from_a_duplicate_event_subscription_should_not_throw_an_exception()
         {
             var eventAggregator         = new EventAggregator();
             var theEvenSubscription     = eventAggregator.Subscribe<BasicEvent>(BasicEventHandler);
@@ -73,11 +73,11 @@ namespace Eventor.Core.Tests.Unit
 
             FluentActions.Invoking(() => duplicateSubscription.Dispose()).Should().NotThrow();
 
-            async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
         }
 
         [Fact]
-        public void The_weak_reference_comparer_should_return_true_for_indentical_references()
+        public void The_weak_reference_comparer_should_return_true_for_identical_references()
         {
             var theComparer         = new EventAggregator.WeakReferenceDelegateComparer();
             var weakRefHandlerOne   = new WeakReference<Delegate>(BasicEventHandler);
@@ -85,7 +85,7 @@ namespace Eventor.Core.Tests.Unit
 
             theComparer.Equals(weakRefHandlerOne, weakRefHandlerTwo).Should().BeTrue();
 
-            async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
         }
         [Fact]
         public void The_weak_reference_comparer_should_return_false_for_different_references()
@@ -109,7 +109,7 @@ namespace Eventor.Core.Tests.Unit
 
             theComparer.Equals(weakRefHandlerOne, weakRefHandlerTwo).Should().BeFalse();
 
-            async Task BasicEventHandlerTwo(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandlerTwo(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
         }
 
         [Fact]
@@ -121,7 +121,7 @@ namespace Eventor.Core.Tests.Unit
 
             theComparer.Equals(weakRefHandlerOne, weakRefHandlerTwo).Should().BeFalse();
 
-            async Task BasicEventHandlerTwo(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandlerTwo(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
         }
 
         [Fact]
@@ -139,7 +139,7 @@ namespace Eventor.Core.Tests.Unit
                 theCodeValue.Should().Be(theComparer.GetHashCode(weakRefHandlerTwo));
             }
 
-            async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
+            static async Task BasicEventHandler(BasicEvent basicEvent, CancellationToken cancellationToken) { await Task.CompletedTask; }
         }
         [Fact]
         public void The_weak_reference_comparer_get_hash_code_should_return_an_integer_value_when_target_is_null()
@@ -151,12 +151,12 @@ namespace Eventor.Core.Tests.Unit
              theCodeValue.Should().BeGreaterThan(0);
         }
         [Fact]
-        public void Trying_to_publish_a_null_event_should_throw_an_arugument_null_exception()
+        public void Trying_to_publish_a_null_event_should_throw_an_argument_null_exception()
 
             => FluentActions.Invoking(() => new EventAggregator().Publish<BasicEvent>(null!)).Should().ThrowExactlyAsync<ArgumentNullException>();
         
         [Fact]
-        public void Trying_to_publish_an_event_with_a_null_publisher_should_throw_an_arugument_null_exception()
+        public void Trying_to_publish_an_event_with_a_null_publisher_should_throw_an_argument_null_exception()
            
             => FluentActions.Invoking(() => new EventAggregator().Publish<BasicEvent>(new BasicEvent("TheSender"),null!)).Should().ThrowExactlyAsync<ArgumentNullException>();
 

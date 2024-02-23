@@ -4,7 +4,7 @@ using Eventor.Core.Tests.FixturesAndData.Events;
 using FluentAssertions;
 using Xunit;
 
-namespace Eventor.Core.Tests.Unit.Stategies;
+namespace Eventor.Core.Tests.Unit.Strategies;
 
 public class PublishStrategyWhenAllTest
 {
@@ -33,13 +33,13 @@ public class PublishStrategyWhenAllTest
         }
         async Task HandleBasicEvent3(BasicEvent theBasicEvent, CancellationToken cancellationToken)
         {
-            await Task.Delay(1);
+            await Task.Delay(1, cancellationToken);
             throw new Exception();
 
         }
         async Task HandleBasicEvent4(BasicEvent theBasicEvent, CancellationToken cancellationToken)
         {
-            await Task.Delay(1);
+            await Task.Delay(1, cancellationToken);
             throw new Exception();
         }
     }

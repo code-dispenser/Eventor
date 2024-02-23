@@ -14,12 +14,12 @@ namespace Eventor.ConsoleDemo;
 
 internal class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         
         try
         {
-            var serviceProvider              = FromConfiuredMicrosoftContainer();
+            var serviceProvider              = FromConfiguredMicrosoftContainer();
             var eventAggregator              = serviceProvider.GetRequiredService<IEventAggregator>();
             var customEventPublisherScenario = serviceProvider.GetRequiredService<CustomEventPublisher>();
             /*
@@ -29,10 +29,10 @@ internal class Program
             //var eventAggregator = serviceProvider.Resolve<IEventAggregator>();
             //var customEventPublisherScenario = serviceProvider.Resolve<CustomEventPublisher>();
 
-            var lineSeperator = new String('-', 100) + "\r\n";
+            var lineSeparator = new String('-', 100) + "\r\n";
 
             await Console.Out.WriteLineAsync("Running local event handlers using fire and forget and wait for all publishing methods");
-            await Console.Out.WriteLineAsync(lineSeperator);
+            await Console.Out.WriteLineAsync(lineSeparator);
 
             var localEventHandlers = new LocalEventHandlers(eventAggregator);
 
@@ -43,7 +43,7 @@ internal class Program
 
             await Console.Out.WriteLineAsync("Running dynamic event handlers using fire and forget and wait for all publishing methods");
             await Console.Out.WriteLineAsync("They work exactly the same as the local handlers except that you cannot unsubscribe as they are dynamic/reactive");
-            await Console.Out.WriteLineAsync(lineSeperator);
+            await Console.Out.WriteLineAsync(lineSeparator);
 
             var dynamicEventHandlers = new DynamicEventHandlers(eventAggregator);
 
@@ -51,20 +51,20 @@ internal class Program
             await dynamicEventHandlers.RunWaitForAllWithUnhandledExceptions();
 
             await Console.Out.WriteLineAsync("Running both handler types using fire and forget");
-            await Console.Out.WriteLineAsync(lineSeperator);
+            await Console.Out.WriteLineAsync(lineSeparator);
 
             await new BothHandlerTypes(eventAggregator).RunHandlersUsingFireAndForget();
 
-            //Give the fire and forget time to finish otherswise the console messages will get muddled.
+            //Give the fire and forget time to finish otherwise the console messages will get muddled.
             await Task.Delay(10);
 
             await Console.Out.WriteLineAsync("Using a custom publisher injected in to the scenario");
-            await Console.Out.WriteLineAsync(lineSeperator);
+            await Console.Out.WriteLineAsync(lineSeparator);
 
             var subscription = eventAggregator.Subscribe<CustomPublisherEvent>(LocalCustomPublisherEvenHandler);
             await customEventPublisherScenario.RunCustomEventPublisher();
 
-            async Task LocalCustomPublisherEvenHandler(CustomPublisherEvent theEvent, CancellationToken cancellationToken)
+            static async Task LocalCustomPublisherEvenHandler(CustomPublisherEvent theEvent, CancellationToken cancellationToken)
             {
                 await Console.Out.WriteLineAsync($"Handled the event {nameof(CustomPublisherEvent)} in the local handler {nameof(LocalCustomPublisherEvenHandler)}.");
             }
@@ -78,12 +78,12 @@ internal class Program
         Console.ReadLine();
     }
 
-    private static ServiceProvider FromConfiuredMicrosoftContainer()
+    private static ServiceProvider FromConfiguredMicrosoftContainer()
     {
         var serviceProvider = Host.CreateApplicationBuilder()
                                     .Services
                                         .AddTransient<CustomEventPublisher>()
-                                        .AddSingleton<IEventPublisher,CustomPublishingStategy>()
+                                        .AddSingleton<IEventPublisher,CustomPublishingStrategy>()
                                         .AddTransient<IEventHandler<AnotherBasicEvent>, AnotherBasicEventHandler>()
                                         .AddTransient<IEventHandler<YetAnotherBasicEvent>, YetAnotherBasicEventHandlerThatThrowsExceptions>()
                                         .AddTransient<IEventHandler<OrderProcessedEvent>, OrderProcessedEventHandler>()
@@ -98,7 +98,7 @@ internal class Program
         var builder = new ContainerBuilder();
 
         builder.RegisterType<CustomEventPublisher>().AsSelf().InstancePerDependency();
-        builder.RegisterType<CustomPublishingStategy>().As<IEventPublisher>().SingleInstance();
+        builder.RegisterType<CustomPublishingStrategy>().As<IEventPublisher>().SingleInstance();
         builder.RegisterType<AnotherBasicEventHandler>().As<IEventHandler<AnotherBasicEvent>>().InstancePerDependency();
         builder.RegisterType<YetAnotherBasicEventHandlerThatThrowsExceptions>().As<IEventHandler<YetAnotherBasicEvent>>().InstancePerDependency();
         builder.RegisterType<OrderProcessedEventHandler>().As<IEventHandler<OrderProcessedEvent>>().InstancePerDependency();

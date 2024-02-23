@@ -5,16 +5,16 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;
 
-namespace Eventor.Core.Tests.Unit.Stategies;
+namespace Eventor.Core.Tests.Unit.Strategies;
 
-public class PublishStategyFireAndForgetTests
+public class PublishStrategyFireAndForgetTests
 {
     private int     _handledCount       = 0;
     private int     HandledCount        => _handledCount;
     private void    IncrementCount()    => Interlocked.Increment(ref _handledCount);
 
     [Fact]
-    public async Task Should_not_propegate_any_unhandled_errors_in_the_event_handlers()
+    public async Task Should_not_propagate_any_unhandled_errors_in_the_event_handlers()
     {
         var publishStrategy = new PublishStrategyFireAndForget();
         var handlerList     = new List<TheEventHandler<BasicEvent>> { HandleBasicEvent, HandleBasicEvent2 };
@@ -43,7 +43,7 @@ public class PublishStategyFireAndForgetTests
         async Task HandleBasicEvent2(BasicEvent theBasicEvent, CancellationToken cancellationToken)
         {
             this.IncrementCount();
-            await Task.Delay(1);
+            await Task.Delay(1,cancellationToken);
             throw new Exception();
 
         }

@@ -2,7 +2,7 @@
 
 namespace Eventor.Core.Strategies;
 /// <summary>
-/// An interface to allow custom event publishers to be used for the publising of events.
+/// An interface to allow custom event publishers to be used for the publishing of events.
 /// </summary>
 public interface IEventPublisher
 {

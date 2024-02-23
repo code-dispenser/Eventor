@@ -4,8 +4,8 @@ using Eventor.Core.Common.Seeds;
 namespace Eventor.Core.Strategies;
 
 /// <summary>
-/// A stategy that just invokes the handler using Task.Run without waiting for the task to complete 
-/// and/or to propegate an unhandled exceptions
+/// A strategy that just invokes the handler using Task.Run without waiting for the task to complete 
+/// and/or to propagate an unhandled exceptions
 /// </summary>
 internal sealed class PublishStrategyFireAndForget : IEventPublisher
 {
