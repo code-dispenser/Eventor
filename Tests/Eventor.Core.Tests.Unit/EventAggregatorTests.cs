@@ -161,7 +161,7 @@ namespace Eventor.Core.Tests.Unit
             => FluentActions.Invoking(() => new EventAggregator().Publish<BasicEvent>(new BasicEvent("TheSender"),null!)).Should().ThrowExactlyAsync<ArgumentNullException>();
 
         [Fact]
-        public async void Should_automatically_unsubscribe_if_subscription_is_null_or_out_of_scope()
+        public async Task Should_automatically_unsubscribe_if_subscription_is_null_or_out_of_scope()
         {
             var eventAggregator = new EventAggregator();
             var theEvent        = new BasicEvent("TheTester");
@@ -184,7 +184,7 @@ namespace Eventor.Core.Tests.Unit
         }
 
         [Fact]
-        public async void Calling_dispose_on_the_returned_subscription_should_remove_the_handler()
+        public async Task Calling_dispose_on_the_returned_subscription_should_remove_the_handler()
         {
             var eventAggregator = new EventAggregator();
             var theEvent        = new BasicEvent("TheTester");
