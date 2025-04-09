@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Eventor.Core.Common.Seeds;
 using Eventor.Core.Tests.FixturesAndData.Events;
-using Eventor.Core.Tests.FixturesAndData.Fixtures;
 using FluentAssertions;
 using Xunit;
 
