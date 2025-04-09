@@ -7,7 +7,7 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Assets\Eventor.snk</AssemblyOriginatorKeyFile>
     <Title>Eventor</Title>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Paul Kent</Authors>
     <Copyright>Copyright (c) 2023 Paul Kent.</Copyright>
     <Description>A versatile event aggregator designed to seamlessly manage both publish/subscribe in-process scenarios and dynamic invocation of handlers such as those used for domain events.</Description>
@@ -17,15 +17,16 @@
 	<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	<DebugType>embedded</DebugType>
 	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	<GenerateDocumentationFile>False</GenerateDocumentationFile>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<PackageReadmeFile>ReadMe.md</PackageReadmeFile>
 	<RepositoryUrl>https://github.com/code-dispenser/Eventor</RepositoryUrl>
 	<PackageIcon>eventor-icon.png</PackageIcon>
-	<AssemblyVersion>1.0.0</AssemblyVersion>
-	<FileVersion>1.0.0</FileVersion>
+	<AssemblyVersion>1.0.1</AssemblyVersion>
+	<FileVersion>1.0.1</FileVersion>
 	<PackageLicenseFile>License.txt</PackageLicenseFile>
 	<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	<PackageTags>event aggregator; broker; pub sub; blazor wasm;.net;</PackageTags>
+	<PackageReleaseNotes>Updated to .net 9</PackageReleaseNotes>
   </PropertyGroup>
 
 	<ItemGroup>
